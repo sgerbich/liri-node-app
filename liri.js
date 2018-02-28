@@ -4,12 +4,13 @@ var keys = require("./keys.js");
 var Twitter = require('twitter');
 var Spotify = require('node-spotify-api');
 var request = require('request');
+var fs = require("fs");
 var spotify = new Spotify(keys.spotify);
 var client = new Twitter(keys.twitter);
 var mode = process.argv[2];
 var arg = process.argv;
 var argName = "";
-var fs = require("fs");
+
 for (var i = 3; i < arg.length; i++) {
     if (i > 3 && i < arg.length) {
         argName = argName + "+" + arg[i];
@@ -86,12 +87,13 @@ function doWhatItSays() {
         if (error) {
             return console.log(error);
         }
-        
+        // console.log("something");
         var dataArr = data.split(",");
         mode = dataArr[0];
         argName = dataArr[1];
+        go();
     });
-    go();
+    
 }
 
 go();
